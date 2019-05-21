@@ -24,6 +24,7 @@ class AlbumPresenter(
 
                 override fun onComplete() {
                     Log.d("Album Fetched", "")
+                    view.onFetchComplete()
                 }
             })
     }

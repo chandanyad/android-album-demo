@@ -2,27 +2,27 @@ package com.album.demo.modules.album.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import com.album.demo.AlbumApplication
 import com.album.demo.R
 import com.album.demo.di.component.DaggerScreenComponent
 import com.album.demo.di.module.AlbumModule
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 import javax.inject.Inject
 
 
 class AlbumActivity : AppCompatActivity(), AlbumContracts.View {
     @Inject
     lateinit var presenter: AlbumContracts.Presenter
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initDagger()
-
-
-        setContentView(R.layout.activity_main)
-        txt.setOnClickListener { loadUI() }
         loadUI()
-
     }
 
     private fun initDagger() {
@@ -34,17 +34,49 @@ class AlbumActivity : AppCompatActivity(), AlbumContracts.View {
     }
 
     private fun loadUI() {
+        setContentView(R.layout.activity_main)
+
+        // RecyclerView node initialized here
+        recycleView.apply {
+            // set a LinearLayoutManager to handle Android
+            // RecyclerView behavior
+            layoutManager = LinearLayoutManager(this@AlbumActivity)
+        }
+
+        refreshButton.setOnClickListener { fetchData() }
+
+        fetchData()
+    }
+
+    private fun fetchData() {
+        progressBar.visibility = VISIBLE
+        recycleViewLayout.visibility = GONE
+        retry_button.visibility = GONE
         presenter.getAlbums()
     }
 
+
     override fun onError() {
+        progressBar.visibility = GONE
+        recycleViewLayout.visibility = GONE
+        retry_button.visibility = VISIBLE
     }
 
+    /**
+     * Update the Recycle view with the adapter
+     */
     override fun updateAlbumList(viewModel: AlbumViewModel) {
-        viewModel.toString()
+        // RecyclerView node initialized here
+        viewModel.let {
+            // set the custom adapter to the RecyclerView
+            recycleView.adapter = AlbumRecyclerAdapter(it.albumList, this@AlbumActivity)
+        }
     }
 
     override fun onFetchComplete() {
+        progressBar.visibility = GONE
+        recycleViewLayout.visibility = VISIBLE
+        retry_button.visibility = GONE
 
     }
 }

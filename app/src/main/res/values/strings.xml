@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MyAlbum</string>
+    <string name="id_text">ID : %s</string>
+    <string name="user_id_text">User ID : %s</string>
+    <string name="title_text">Title : %s</string>
+    <string name="retry_button_text">Retry</string>
+    <string name="refresh_button_text">refresh</string>
 </resources>
