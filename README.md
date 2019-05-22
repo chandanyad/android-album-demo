@@ -10,3 +10,5 @@ Below libraries are used –
 6.	Kotlin high level methods – let, with, apply, run
 7.	PlantUML – for creating UML diagram
 
+The architecture diagram can be found inside the app at the location - app/diagram/AlbumDemoUMLDiagram.png
+
