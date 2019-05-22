@@ -3,6 +3,7 @@ API URL - https://jsonplaceholder.typicode.com/albums
 
 The architecture diagram can be found inside the app at the location - app/diagram/AlbumDemoUMLDiagram.png
 
+
 Below libraries are used –
  1.	Dagger 2.0 – For dependency Inject
  2.	Retrofit – Used for network handling and API interaction  
@@ -11,6 +12,7 @@ Below libraries are used –
  5.	Rxjava – For Async data handling
  6.	Kotlin high level methods – let, with, apply, run
  7.	PlantUML – for creating UML diagram
+
 
 
 Recommendations for future improvements -
