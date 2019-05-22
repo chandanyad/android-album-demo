@@ -1,7 +1,7 @@
 Created a Kotlin sample app to fetch the data from the API and render the data into the RecycleView.
 API URL - https://jsonplaceholder.typicode.com/albums
 
-Below are the libraries used –
+Below libraries are used –
 1.	Dagger 2.0 – For dependency Inject
 2.	Retrofit – Used for network handling and API interaction  
 3.	GSON – To parse the API response
