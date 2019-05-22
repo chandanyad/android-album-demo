@@ -1,4 +1,0 @@
-#Wed May 22 11:48:30 SGT 2019
-base.0=C\:\\git-workspace\\android-album-demo\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
-path.0=classes.dex
-renamed.0=classes.dex
