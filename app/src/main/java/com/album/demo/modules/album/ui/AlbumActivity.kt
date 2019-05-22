@@ -12,11 +12,9 @@ import com.album.demo.di.module.AlbumModule
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-
 class AlbumActivity : AppCompatActivity(), AlbumContracts.View {
     @Inject
     lateinit var presenter: AlbumContracts.Presenter
-    private lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

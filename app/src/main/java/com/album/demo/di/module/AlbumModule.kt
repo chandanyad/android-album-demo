@@ -15,6 +15,7 @@ import com.album.demo.modules.album.ui.AlbumContracts
 import com.album.demo.modules.album.ui.AlbumPresenter
 import dagger.Module
 import dagger.Provides
+import io.realm.Realm
 import org.intellij.lang.annotations.Identifier
 import retrofit2.Retrofit
 import javax.inject.Named
@@ -44,7 +45,7 @@ class AlbumModule(private var activity: Activity) {
     @Provides
     @AlbumScreenScope
     fun provideAlbumRepo(
-        @Named("REMOTE_DS") localDataSourceContract: AlbumDataSourceContract,
+        @Named("LOCAL_DS") localDataSourceContract: AlbumDataSourceContract,
         @Named("REMOTE_DS") remoteDataSourceContract: AlbumDataSourceContract
     ): AlbumRepoContract {
         return AlbumRepo(localDataSourceContract, remoteDataSourceContract)
@@ -53,8 +54,8 @@ class AlbumModule(private var activity: Activity) {
     @Provides
     @AlbumScreenScope
     @Named("LOCAL_DS")
-    fun provideAlbumLocalDS(): AlbumDataSourceContract {
-        return AlbumLocalDS()
+    fun provideAlbumLocalDS(realm: Realm): AlbumDataSourceContract {
+        return AlbumLocalDS(realm)
     }
 
     @Provides

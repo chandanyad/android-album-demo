@@ -12,8 +12,8 @@ import io.reactivex.observers.DisposableObserver
  * Implementation of [AlbumRepoContract]
  */
 class AlbumRepo(
-    private val remoteDataSourceContract: AlbumDataSourceContract,
-    private val localDataSourceContract: AlbumDataSourceContract
+    private val localDataSourceContract: AlbumDataSourceContract,
+    private val remoteDataSourceContract: AlbumDataSourceContract
 ) : AlbumRepoContract {
 
     override fun getAlbums(): Observable<List<Album>> {
@@ -26,6 +26,8 @@ class AlbumRepo(
      * Get the data from the Local Data source
      */
     private fun getFromLocalDB(emitter: ObservableEmitter<List<Album>>) {
+        Log.d(AlbumRepo::class.java.name, "Getting data from Local")
+
         localDataSourceContract.getAlbums()
             .subscribe(object : DisposableObserver<List<Album>>() {
                 override fun onNext(t: List<Album>) = emitter.onNext(t) // Send data back in stream
@@ -42,6 +44,8 @@ class AlbumRepo(
      * Get the data from the Remote Data source
      */
     private fun getFromRemote(emitter: ObservableEmitter<List<Album>>) {
+        Log.d(AlbumRepo::class.java.name, "Getting data from Remote")
+
         remoteDataSourceContract.getAlbums()
             .subscribe(object : DisposableObserver<List<Album>>() {
                 override fun onNext(t: List<Album>) {
