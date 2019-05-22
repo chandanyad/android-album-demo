@@ -23,6 +23,16 @@ My modules have 5 parts –
                ii.	Remote – For API interaction
  
  
+Behaviour Implemented – 
+All the logic will be handled by the service layer. Below approach will be followed.  
+     UI -> Presenter -> Service ->  Repo -> First Local then Remote 
+
+A Cache of 15 sec is implemented just to show that data is cached.
+ 
+User will see this progress bar if data is being fetched from the API. After 15 sec you can press Refresh button to again fetch it from the API, but within 15 sec it will be fetched from the Database. It will be quick that you feel that nothing is hanppening on the UI but if you check the lod you will find that it is feacting from the local DB.
+
+
+
 Below libraries are used -
 1.	Dagger 2.0 – For dependency Inject
 2.	Retrofit – Used for network handling and API interaction
