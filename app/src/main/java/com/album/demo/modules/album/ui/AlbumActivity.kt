@@ -10,7 +10,6 @@ import com.album.demo.R
 import com.album.demo.di.component.DaggerScreenComponent
 import com.album.demo.di.module.AlbumModule
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import javax.inject.Inject
 
 
@@ -67,9 +66,11 @@ class AlbumActivity : AppCompatActivity(), AlbumContracts.View {
      */
     override fun updateAlbumList(viewModel: AlbumViewModel) {
         // RecyclerView node initialized here
-        viewModel.let {
+        viewModel.apply {
+            albumList.sortedBy { it.title }
+        }.run {
             // set the custom adapter to the RecyclerView
-            recycleView.adapter = AlbumRecyclerAdapter(it.albumList, this@AlbumActivity)
+            recycleView.adapter = AlbumRecyclerAdapter(albumList, this@AlbumActivity)
         }
     }
 
@@ -77,6 +78,5 @@ class AlbumActivity : AppCompatActivity(), AlbumContracts.View {
         progressBar.visibility = GONE
         recycleViewLayout.visibility = VISIBLE
         retry_button.visibility = GONE
-
     }
 }

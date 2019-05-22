@@ -17,3 +17,9 @@ i
 9app/src/main/java/com/album/demo/di/module/AlbumModule.kt,2\3\2386e0bb4dc53d6057046b03c6db238b49220bf4
 p
 @app/src/main/java/com/album/demo/di/component/ScreenComponent.kt,9\8\98dc9c2dbf1e100d7c1896f1c129bf9fc76871ab
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+y
+Iapp/src/main/java/com/album/demo/modules/album/ui/AlbumRecyclerAdapter.kt,5\6\5698b11e143fcef9dc74ad5c9e508494b957e0eb
+@
+app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164

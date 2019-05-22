@@ -27,20 +27,24 @@ class AlbumRecyclerAdapter(private val albumList: List<Album>, private val conte
 
 
     class AlbumHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private lateinit var titleView: TextView
-        private lateinit var idView: TextView
-        private lateinit var userIDView: TextView
+        private var titleView: TextView
+        private var idView: TextView
+        private var userIDView: TextView
 
         init {
-            titleView = itemView.findViewById(R.id.title)
-            idView = itemView.findViewById(R.id.id)
-            userIDView = itemView.findViewById(R.id.user_id)
+            itemView.apply {
+                titleView = findViewById(R.id.title)
+                idView = findViewById(R.id.id)
+                userIDView = findViewById(R.id.user_id)
+            }
         }
 
         fun bind(album: Album, context: Context) {
-            idView.setText(context.getString(R.string.id_text, album.id.toString()))
-            titleView.setText(context.getString(R.string.title_text, album.title))
-            userIDView.setText(context.getString(R.string.user_id_text, album.userId))
+            with(album) {
+                idView.text = context.getString(R.string.id_text, id.toString())
+                titleView.text = context.getString(R.string.title_text, title)
+                userIDView.text = context.getString(R.string.user_id_text, userId)
+            }
 
         }
     }
