@@ -25,7 +25,10 @@ class AlbumRemoteDS(private val api: AlbumApi) : AlbumDataSourceContract {
                         onComplete()
                     }
 
-                    override fun onError(e: Throwable) = emitter.onError(APIException())
+                    override fun onError(e: Throwable) {
+                        emitter.onError(APIException())
+                        onComplete()
+                    }
                     override fun onComplete() = emitter.onComplete()
                 })
         }

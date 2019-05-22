@@ -1,9 +1,9 @@
 package com.album.demo.modules.album.ui
 
 import android.util.Log
+import com.album.demo.exceptions.NoDataFoundException
 import com.album.demo.modules.album.domain.AlbumServiceContract
 import com.album.demo.modules.album.domain.models.Album
-import io.reactivex.Observable
 import io.reactivex.observers.DisposableObserver
 
 class AlbumPresenter(
@@ -15,17 +15,16 @@ class AlbumPresenter(
         albumServiceContract.getAlbumList()
             .subscribe(object : DisposableObserver<List<Album>>() {
                 override fun onNext(t: List<Album>) {
-                    view.updateAlbumList(AlbumViewModel(t)) // Convert the domain model into view model
+                    if (t.isNullOrEmpty()) {
+                        onError(NoDataFoundException())
+                    } else {
+                        val ss = AlbumViewModel(t)
+                        view.updateAlbumList(ss) // Convert the domain model into view model
+                    }
                 }
 
-                override fun onError(e: Throwable) {
-                    view.onError()
-                }
-
-                override fun onComplete() {
-                    Log.d("Album Fetched", "")
-                    view.onFetchComplete()
-                }
+                override fun onError(e: Throwable) = view.onError()
+                override fun onComplete() = view.onFetchComplete()
             })
     }
 }
