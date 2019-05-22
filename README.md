@@ -1,4 +1,4 @@
-Created a Kotlin sample app to fetch the data from the API and render the data into the RecycleView.
+The Created a Kotlin sample app to fetch the data from the API and render the data into the RecycleView.
 API URL - https://jsonplaceholder.typicode.com/albums
 
 Below libraries are used –
@@ -11,4 +11,12 @@ Below libraries are used –
 7.	PlantUML – for creating UML diagram
 
 The architecture diagram can be found inside the app at the location - app/diagram/AlbumDemoUMLDiagram.png
+
+Recommendations for future improvements -
+1.	Encryption - Data store in the DB is not encrypted. We can encrypt the data or encrypt the whole DB. Ream provide that option
+2.	Login Auth - The API call can be secure using auth protocol.
+3.	MinSDK Version is 21 supports restrict few of the Java feature usage.
+4.	Analytics – To get the user behaviour on the screen
+5.	Crash Report – We can integrate tool to get the crash logs using tools – HockeyApp, crashlytics.
+
 
