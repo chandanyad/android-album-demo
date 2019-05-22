@@ -6,9 +6,8 @@ The architecture diagram can be found inside the app at the location - app/diagr
 
 
 Module Driven Development approach (MDD) Approach - 
-    I had tried to used the MDD approach using the MVP architecture.
-    I tried to split the Model role into further parts. Album is the module which I had implemented as you can see in the below picture.
-            
+    I had tried to used the MDD approach using the MVP architecture. I tried to split the Model role into further parts. 
+    
 My modules have 5 parts –
 
 1.	UI – Activity and Fragments (contains only UI, no brainer logic)
