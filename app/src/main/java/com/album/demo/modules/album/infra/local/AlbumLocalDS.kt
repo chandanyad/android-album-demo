@@ -15,7 +15,7 @@ import java.util.*
  * Implementation of [AlbumDataSourceContract]
  */
 class AlbumLocalDS(private var mRealm: Realm) : AlbumDataSourceContract {
-    private val stalePeriod = 1 * 15 * 1000 // 1 minute
+    private val stalePeriod = 1 * 15 * 1000 // 15 sec
 
     override fun getAlbums(): Observable<List<Album>> {
         return Observable.create { emitter ->
