@@ -1,0 +1,104 @@
+@startuml
+
+'------ Domain -------'
+package Domain {
+    interface AlbumServiceContract {
+        + getAlbumList(): Observable<List<Album>>
+    }
+
+    class AlbumService {
+      - repoContract: AlbumRepoContract
+    }
+    AlbumServiceContract <|.. AlbumService
+    AlbumPresenter *-- AlbumServiceContract
+    AlbumRepoContract *-- AlbumService
+
+    class Album {
+        + userId: String
+        + id: String
+        + title: String
+    }
+
+    interface AlbumRepoContract {
+        + getAlbums(): Observable<List<Album>>
+    }
+}
+
+package UI {
+    '------ View -------'
+    interface ViewContract {
+        + updateAlbumList(viewModel: AlbumViewModel)
+        + onFetchComplete()
+        + onError()
+    }
+   
+    class AlbumViewModel {
+        + albumList: List<Album>
+    }
+
+    class AlbumActivity
+    ViewContract <|.. AlbumActivity
+    AlbumActivity *-- PresenterContract
+
+    '------ Presenter -------'
+    interface PresenterContract {
+        + getAlbums()
+    }
+
+    class AlbumPresenter
+    PresenterContract <|.. AlbumPresenter
+}
+
+
+'------ Infastructure -------'
+package Infastructure {
+    
+     class AlbumRepo {
+        - localDataSourceContract: AlbumDataSourceContract
+        - remoteDataSourceContract: AlbumDataSourceContract
+    } 
+    AlbumRepoContract <|.. AlbumRepo
+    AlbumRepo *-- AlbumDataSourceContract  
+
+    interface AlbumDataSourceContract {
+        + getAlbums(): Observable<List<Album>>
+        + saveAlbums(albumList: List<Album>)
+    }
+
+
+    '------ Local Data source -------'
+    package Local {
+        class AlbumLocalDS {
+            - realm: Realm
+        }
+        AlbumDataSourceContract <|.. AlbumLocalDS 
+
+         class ROAlbum{
+            + userId: String
+            + id: String
+            + title: String
+            + lastSyncDate : Date
+        }
+    }
+    
+    '------ Remote Data source -------'
+    package Remote {
+        class AlbumRemoteDS {
+            - api: AlbumApi
+        }
+        AlbumDataSourceContract <|.. AlbumRemoteDS
+        AlbumRemoteDS *--  AlbumApi
+
+        interface AlbumApi {
+            + fetchAlbums(): Observable<List<AlbumResponse>>
+        }
+
+        class AlbumResponse{
+            + userId: String
+            + id: String
+            + title: String
+        }
+    }
+}
+
+@enduml
